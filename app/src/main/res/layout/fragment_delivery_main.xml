@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DeliveryMain">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,14 +18,23 @@
             android:text="지도 보여주는 곳"/>
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tvQRSelect"
+            android:layout_height="350dp"
+            android:fillViewport="true">
+            <ListView
+                android:id="@+id/dListView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
+        </ScrollView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="오류메세지"/>
         </ScrollView>
     </LinearLayout>
-
+</ScrollView>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -33,5 +45,4 @@
             android:layout_alignParentBottom="true"
             android:text="QR코드 인식"/>
     </RelativeLayout>
-
 </FrameLayout>
