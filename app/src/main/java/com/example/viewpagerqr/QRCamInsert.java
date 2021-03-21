@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -28,9 +29,12 @@ public class QRCamInsert extends AppCompatActivity {
     //DB
     QRcodeDB qrcodedb;
     SQLiteDatabase sqlDB;
+    Cursor cursor;
     //QRscan
     JSONObject obj;
     IntentResult result;
+    //프래그먼트로 값 전달을 위한 변수 (코드, 받는 이 주소, 받는 이 비고)
+    DeliveryMain dmValues=new DeliveryMain();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,21 @@ public class QRCamInsert extends AppCompatActivity {
 
         //intializing scan object
         qrScan = new IntentIntegrator(this);
+
+        //프래그먼트 값 전달
+        sqlDB=qrcodedb.getReadableDatabase();
+        cursor = sqlDB.rawQuery("SELECT * FROM qrcodeTBL;", null);
+        cursor.moveToFirst();
+        dmValues.myArrayAdapter.notifyDataSetChanged();
+        do{
+            String code = "코드 : "+cursor.getString(0);
+            String address = "주소 : "+cursor.getString(8);
+            String note = "비고 : "+cursor.getString(10);
+            dmValues.myArrayList.add(code+"\n"+ address+"\n"+note+"\n");
+            dmValues.myArrayAdapter.notifyDataSetChanged();
+        }while(cursor.moveToNext());
+        cursor.close();
+        sqlDB.close();
 
         //button onClick
         buttonScan.setOnClickListener(new View.OnClickListener() {

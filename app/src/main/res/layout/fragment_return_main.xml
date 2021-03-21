@@ -4,11 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReturnMain">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="지도 보여주는 곳"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:fillViewport="true">
+            <ListView
+                android:id="@+id/dListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnORCamera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="QR코드 인식"/>
+        </RelativeLayout>
+    </LinearLayout>
 
 </FrameLayout>
